@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(./images/6016294.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.gfont{
+  font-family: "Montserrat", sans-serif;
+}
+.gfontsecond{
+  font-family: "Inter", sans-serif;
+}
+.laptopcat{
+  background: url(./images/Category/laptop.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
+  height: 100px;
+  width: 100px;
+}
+.partscat{
+  background: url(./images/Category/cpu.png);
+   background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
+  height: 100px;
+  width: 100px;
+}
+.peripheralscat{
+  background: url(./images/Category/mouse.png);
+   background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
+  height: 100px;
+  width: 100px;
+}
+.accesscat{
+  background: url(./images/Category/accessories.png);
+   background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
+  height: 100px;
+  width: 100px;
+}
+.buildbg{
+  background: url(./images/buildbg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
+
+}
