@@ -3,7 +3,7 @@ import "swiper/css";
 import Wanderer from './images/Suggestion/wanderer.png'
 import Midway from './images/Suggestion/midway.png'
 import Warp from './images/Suggestion/warp.png'
-import Zenith from './images/suggestion/zenith.png'
+import Zenith from './images/Suggestion/zenith.png'
 
 export const BuildSuggestion=()=>{
     return(
