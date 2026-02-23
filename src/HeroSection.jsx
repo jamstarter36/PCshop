@@ -21,8 +21,7 @@ export const HeroSection=()=>{
                 modules={[Autoplay, Pagination]}
                 autoplay={{ delay: 2500, disableOnInteraction: false }}
                 loop={true}
-                className="w-full"
-                >
+                className="w-full">
                 <SwiperSlide>
                     <div className="relative w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
                         <img src={Msi} alt="MSI" className="absolute top-0 left-0 w-full h-full object-cover" />

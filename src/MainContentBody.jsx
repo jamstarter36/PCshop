@@ -10,6 +10,7 @@ import { Others } from "./pages/Others";
 import { Routes, Route } from 'react-router-dom';
 import { HeroSection } from './HeroSection'
 import { Footer } from "./Footer";
+import { Cart } from "./Cart";
 
 const DefaultContent = () => {
   return (
@@ -35,6 +36,7 @@ export const MainContentBody=()=>{
             <Route path="/pcparts" element={<PcParts />} />
             <Route path="/peripherals" element={<Peripherals />}/>
             <Route path="/others" element={<Others />}/>
+            <Route path="/cart" element={<Cart />} />
         </Routes>
         </>
     );
