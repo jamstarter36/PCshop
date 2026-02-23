@@ -49,7 +49,7 @@
 import { useState } from "react";
 import { Menu, X, ShoppingCart, ChevronDown } from "lucide-react";
 import { Link } from 'react-router-dom';
-import Logo from './images/Logo.png';
+import Logo from './images/logo.png';
 import { useCart } from './context/CartContext';
 
 export const Navigation = () => {
