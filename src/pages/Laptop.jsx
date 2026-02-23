@@ -4,24 +4,36 @@ import { useCart } from '../context/CartContext';
 
 const LaptopCard = ({ laptop }) => {
     const [showSpecs, setShowSpecs] = useState(false);
+    const [added, setAdded] = useState(false);
     const { addToCart } = useCart();
 
+    const handleAddToCart = () => {
+        addToCart({ name: laptop.name, price: laptop.price });
+        setAdded(true);
+        setTimeout(() => setAdded(false), 2000);
+    };
+
     return (
-        <div className="bg-white shadow-sm flex flex-col items-center p-1">
-            <span className="text-center">{laptop.name}</span>
+        <div className="bg-white shadow-sm flex flex-col items-center p-1 relative">
+            {added && (
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-green-500 text-white text-xs px-2 py-1 rounded shadow z-10 whitespace-nowrap animate-bounce">
+                    Item added to cart!
+                </div>
+            )}
+            <span className="text-center font-bold">{laptop.name}</span>
             <button
-                className="bg-orange-500 p-1 px-2 cursor-pointer hover:bg-orange-400 text-center text-sm w-full"
+                className="bg-orange-500 p-1 px-2 cursor-pointer hover:bg-orange-400 text-center text-xs w-full"
                 onClick={() => setShowSpecs(!showSpecs)}>
                 {showSpecs ? 'Hide Specs' : 'View Specs'}
             </button>
             <div className={`overflow-hidden transition-all duration-300 ease-in-out w-full ${showSpecs ? 'max-h-96 opacity-100 mt-1' : 'max-h-0 opacity-0'}`}>
                 <div className="text-center text-sm bg-gray-100 rounded p-2">{laptop.specs}</div>
             </div>
-            <span className="text-red-500">{laptop.price}</span>
+            <span className="text-red-500 mt-1">{laptop.price}</span>
             <div className="flex mt-auto gap-1 mt-2">
                 <button
-                    className="bg-blue-500 p-1 cursor-pointer hover:bg-blue-400 transition-transform duration-300 ease-in-out hover:scale-110"
-                    onClick={() => addToCart({ name: laptop.name, price: laptop.price })}>
+                    className="rounded shadow-lg bg-blue-500 py-1 px-2 cursor-pointer hover:bg-blue-400 transition-transform duration-300 ease-in-out hover:scale-110"
+                    onClick={handleAddToCart}>
                     Add to cart
                 </button>
             </div>
