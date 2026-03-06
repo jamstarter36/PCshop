@@ -26,8 +26,8 @@ export const Deals = () => {
                 </div>
             </div>
             <div className="flex flex-row justify-center items-center">
-                <div className="flex flex-row w-300 m:w-120 h-full bg-gray-200 p-2">
-                    <div className="grid grid-cols-3 w-full bg-gray-200 gap-2">
+                <div className="w-300 m:w-120 h-full bg-gray-200 p-2">
+                    <div className="grid grid-cols-1 min-[500px]:grid-cols-3 w-full bg-gray-200 gap-2">
                         {promo.map((item, i) => {
                             const color = promoColors[i % promoColors.length];
                             const isAdded = added === item.id;
@@ -54,13 +54,13 @@ export const Deals = () => {
                                     </div>
 
                                     {/* Footer */}
-                                    <div className="px-3 pb-3 flex items-center justify-between mt-1">
+                                    <div className="px-3 pb-3 flex flex-col gap-1 mt-1">
                                         <span className="text-red-500 font-bold text-sm">₱{item.price}</span>
                                         <button
                                             onClick={() => handleAddToCart(item)}
-                                            className={`rounded text-white text-xs font-semibold px-2 py-1 cursor-pointer transition-all duration-200 hover:scale-105 shadow
+                                            className={`w-full rounded text-white text-xs font-semibold px-2 py-1 cursor-pointer transition-all duration-200 hover:scale-105 shadow
                                                 ${isAdded ? 'bg-green-500 hover:bg-green-400' : `${color.bg} ${color.hover}`}`}>
-                                            {isAdded ? '✓ Added!' : '+ Add to cart'}
+                                            {isAdded ? '✓ Added!' : '+ Add to Cart'}
                                         </button>
                                     </div>
                                 </div>
