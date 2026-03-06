@@ -2,14 +2,16 @@ import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { MdMonitor } from "react-icons/md";
+import { BsMouse, BsKeyboard, BsHeadphones, BsCameraVideo } from "react-icons/bs";
 import { monitor, mouse, keyboard, headset, camera } from "../data/FakeDb";
 
 const categories = [
-  { label: "Monitor",  data: monitor,  img: null },
-  { label: "Mouse",    data: mouse,    img: null },
-  { label: "Keyboard", data: keyboard, img: null },
-  { label: "Headset",  data: headset,  img: null },
-  { label: "Camera",   data: camera,   img: null },
+  { label: "Monitor",  data: monitor,  icon: MdMonitor      },
+  { label: "Mouse",    data: mouse,    icon: BsMouse        },
+  { label: "Keyboard", data: keyboard, icon: BsKeyboard     },
+  { label: "Headset",  data: headset,  icon: BsHeadphones   },
+  { label: "Camera",   data: camera,   icon: BsCameraVideo  },
 ];
 
 const PeripheralCard = ({ item }) => {
@@ -68,31 +70,29 @@ export const Peripherals = () => {
       <div className="flex justify-center w-full">
         <div className="bg-gray-200 w-full max-w-5xl overflow-hidden py-2 px-2">
           <Swiper slidesPerView="auto" spaceBetween={8} className="w-full">
-            {categories.map((cat, i) => (
-              <SwiperSlide key={cat.label} style={{ width: 'clamp(75px, 10vw, 115px)' }}>
-                <div
-                  onClick={() => setActiveIdx(i)}
-                  className={`flex flex-col cursor-pointer rounded border-2 overflow-hidden transition-all duration-200
-                    ${i === activeIdx ? 'border-blue-500 shadow-md' : 'border-gray-200 bg-white hover:border-blue-300'}`}
-                  style={{ height: 'clamp(75px, 10vw, 115px)' }}>
-
-                  {/* Image area */}
-                  <div className={`w-full flex-1 flex items-center justify-center ${i === activeIdx ? 'bg-blue-50' : 'bg-gray-100'}`}>
-                    {cat.img
-                      ? <img src={cat.img} alt={cat.label} className="w-full h-full object-cover" />
-                      : <span className="text-gray-300" style={{ fontSize: 'clamp(20px, 4vw, 32px)' }}>📦</span>
-                    }
+            {categories.map((cat, i) => {
+              const Icon = cat.icon;
+              const isActive = i === activeIdx;
+              return (
+                <SwiperSlide key={cat.label} style={{ width: 'clamp(75px, 10vw, 115px)' }}>
+                  <div
+                    onClick={() => setActiveIdx(i)}
+                    className={`flex flex-col items-center justify-center cursor-pointer rounded border-2 overflow-hidden transition-all duration-200 gap-1 py-3 px-1
+                      ${isActive ? 'border-blue-500 bg-blue-50 shadow-md' : 'border-gray-200 bg-white hover:border-blue-300'}`}
+                    style={{ height: 'clamp(75px, 10vw, 115px)' }}>
+                    <Icon
+                      size={28}
+                      className={`transition-colors duration-200 ${isActive ? 'text-blue-500' : 'text-gray-400'}`}
+                    />
+                    <span
+                      className={`text-center font-bold truncate w-full px-1 transition-colors duration-200 ${isActive ? 'text-blue-500' : 'text-gray-600'}`}
+                      style={{ fontSize: 'clamp(9px, 1.5vw, 11px)' }}>
+                      {cat.label}
+                    </span>
                   </div>
-
-                  {/* Label */}
-                  <div className={`w-full text-center font-bold truncate py-1 px-1
-                    ${i === activeIdx ? 'bg-blue-500 text-white' : 'bg-white text-gray-600'}`}
-                    style={{ fontSize: 'clamp(9px, 1.5vw, 12px)' }}>
-                    {cat.label}
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </div>
       </div>
