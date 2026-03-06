@@ -1,13 +1,27 @@
 import { useState } from "react";
-import { Menu, X, ShoppingCart, ChevronDown } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Menu, X, ShoppingCart } from "lucide-react";
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from './images/logo.png';
 import { useCart } from './context/CartContext';
 
 export const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [shopOpen, setShopOpen] = useState(false);
     const { cartItems } = useCart();
+    const navigate = useNavigate();
+
+    const scrollTo = (id) => {
+        setIsOpen(false);
+        // If not on home, navigate home first then scroll
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            navigate('/');
+            setTimeout(() => {
+                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+    };
 
     return (
         <>
@@ -19,10 +33,9 @@ export const Navigation = () => {
                         </div>
                         <div className="hidden md:flex space-x-8 items-center">
                             <Link to="/" className="hover:underline hover:text-gray-300">Home</Link>
-                            <Link to="/" className="hover:underline hover:text-gray-300">Promo</Link>
-                            <Link to="/" className="hover:underline hover:text-gray-300">Build</Link>
-                            <Link to="/" className="hover:underline hover:text-gray-300">Hot Deals</Link>
-                            <Link to="/" className="hover:underline hover:text-gray-300">Contacts</Link>
+                            <button onClick={() => scrollTo('hot-deals')} className="hover:underline hover:text-gray-300 cursor-pointer">Promo</button>
+                            <button onClick={() => scrollTo('build-your-pc')} className="hover:underline hover:text-gray-300 cursor-pointer">Build</button>
+                            <button onClick={() => scrollTo('footer')} className="hover:underline hover:text-gray-300 cursor-pointer">Contacts</button>
                             <Link to="/cart" className="relative hover:text-gray-300">
                                 <ShoppingCart size={22} />
                                 {cartItems.length > 0 && (
@@ -40,18 +53,18 @@ export const Navigation = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Mobile Menu */}
                 <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"}`}>
-                    {isOpen && (
-                        <div className="grid grid-cols-2 px-4 pb-2">
-                            <Link to="/" className="hover:underline hover:text-gray-300 py-1">Home</Link>
-                            <Link to="/" className="hover:underline hover:text-gray-300 py-1">Promo</Link>
-                            <Link to="/" className="hover:underline hover:text-gray-300 py-1">Build</Link>
-                            <Link to="/" className="hover:underline hover:text-gray-300 py-1">Hot Deals</Link>
-                            <Link to="/" className="hover:underline hover:text-gray-300 py-1">Contacts</Link>
-                            <Link to="/laptop" onClick={() => setIsOpen(false)} className="hover:underline hover:text-gray-300 py-1">Laptops</Link>
-                            <Link to="/cart" onClick={() => setIsOpen(false)} className="hover:underline hover:text-gray-300 py-1">Cart ({cartItems.length})</Link>
-                        </div>
-                    )}
+                    <div className="grid grid-cols-2 px-4 pb-2">
+                        <Link to="/" onClick={() => setIsOpen(false)} className="hover:underline hover:text-gray-300 py-1">Home</Link>
+                        <button onClick={() => scrollTo('hot-deals')} className="hover:underline hover:text-gray-300 py-1 text-left">Promo</button>
+                        <button onClick={() => scrollTo('build-your-pc')} className="hover:underline hover:text-gray-300 py-1 text-left">Build</button>
+                        <button onClick={() => scrollTo('hot-deals')} className="hover:underline hover:text-gray-300 py-1 text-left">Hot Deals</button>
+                        <button onClick={() => scrollTo('footer')} className="hover:underline hover:text-gray-300 py-1 text-left">Contacts</button>
+                        <Link to="/laptop" onClick={() => setIsOpen(false)} className="hover:underline hover:text-gray-300 py-1">Laptops</Link>
+                        <Link to="/cart" onClick={() => setIsOpen(false)} className="hover:underline hover:text-gray-300 py-1">Cart ({cartItems.length})</Link>
+                    </div>
                 </div>
             </nav>
         </>
